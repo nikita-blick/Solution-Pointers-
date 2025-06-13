@@ -6,6 +6,9 @@ using std::endl;
 
 #define tab "\t"
 
+int** Allocate(const int rows, const int cols);
+void Clear(int**& arr, const int rows, const int cols = 0);
+
 void FillRand(int arr[], const int n, int minRand = 0, int maxRand = 100);
 void FillRand(int** arr, const int rows, const int cols, int minRand = 0, int maxRand = 100);
 void Print(int arr[], const int n);
@@ -18,6 +21,7 @@ int* pop_back(int arr[], int& n);
 int* pop_front(int arr[], int& n);
 
 int** push_row_back(int** arr, int& rows, const int cols);
+int** insert_row(int** arr, int& rows, const int cols, const int index);
 
 void push_col_back(int** arr, const int rows, int& cols);
 
@@ -66,17 +70,12 @@ void main()
 	cout << "Введите количество строк: "; cin >> rows;
 	cout << "Введите количество элементов строки: "; cin >> cols;
 
-	////////		объявление двумерного динамического массива		///////
-	
+	int** arr = Allocate(rows, cols);
 
-	//1) содаем массив указателей:
-	int** arr = new int* [rows];
+	// Copy- функция не изменяет переданную в нее память, а возращает изменненую копию полученной памяти
+	//Mutable - Функция изменяет полученный блок памяти;
 
-	//2) выделяем память под строки:
-	for (int i = 0; i < rows; i++)
-	{
-		arr[i] = new int[cols];
-	}
+
 
 	FillRand(arr, rows, cols);
 	Print(arr, rows, cols);
@@ -89,10 +88,38 @@ void main()
 	for (int i = 0; i < rows; i++)arr[i][cols - 1] = rand() % 1000;
 	Print(arr, rows, cols);
 
-	////////		удаление двумерного динамического массива		///////
-	
+	int index;
+	cout << "Введите индекс добавляемого значения:"; cin >> index;
+	arr = insert_row(arr, rows, cols, index);
+	Print(arr, rows, cols);
 
-	//1) сначала удаляются строки двумерного массива:
+
+	Clear(arr, rows, cols);
+
+	////////		удаление двумерного динамического массива		///////
+
+
+
+}
+
+
+int** Allocate(const int rows, const int cols)
+{
+	////////		Объявление двумерного динамического массива		///////
+
+	//1) Содаем массив указателей:
+	int** arr = new int* [rows];
+
+	//2) выделяем память под строки:
+	for (int i = 0; i < rows; i++)
+	{
+		arr[i] = new int[cols];
+	}
+	return arr;
+}
+
+void Clear(int**& arr, const int rows, const int cols)
+{
 	for (int i = 0; i < rows; i++)
 	{
 		delete[] arr[i];
@@ -102,6 +129,7 @@ void main()
 	delete[] arr;
 
 }
+
 void FillRand(int arr[], const int n, int minRand, int maxRand)
 {
 	for (int i = 0; i < n; i++)
@@ -227,6 +255,22 @@ int** push_row_back(int** arr, int& rows, const int cols)
 	rows++;
 
 	//6) возвращаем новый массив:
+	return buffer;
+}
+
+int** insert_row(int** arr, int& rows, const int cols, const int index)
+{
+	if (index<0 || index>rows)
+	{
+		cout << "Error: Out of range exception" << endl;
+		return arr;
+	}
+	int** buffer = new int* [rows + 1] {};
+	for (int i = 0;i < index;i++)buffer[i] = arr[i];
+	for (int i = index;i < rows; i++)buffer[i + 1] = arr[i];
+	delete[] arr;
+	buffer[index] = new int[cols] {};
+	rows++;
 	return buffer;
 }
 
