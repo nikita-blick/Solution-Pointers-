@@ -1,4 +1,4 @@
-#include<iostream>
+п»ї#include<iostream>
 using namespace std;
 
 void FillRand(int arr[], const int n);
@@ -13,10 +13,10 @@ void main()
 	Print(arr, n);
 
 
-	// подсчет кол-во чет и нечет элементов
+	// РїРѕРґСЃС‡РµС‚ РєРѕР»-РІРѕ С‡РµС‚ Рё РЅРµС‡РµС‚ СЌР»РµРјРµРЅС‚РѕРІ
 
-	int even_count = 0;   // кол-во четных элементов
-	int odd_count = 0;    // кол-во нечетных элементов
+	int even_count = 0;   // РєРѕР»-РІРѕ С‡РµС‚РЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
+	int odd_count = 0;    // РєРѕР»-РІРѕ РЅРµС‡РµС‚РЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 
 	for (int i = 0; i < n; i++)
 	{
@@ -24,10 +24,10 @@ void main()
 		else odd_count++;*/
 		(arr[i] % 2 ? odd_count : even_count)++;
 	}
-	cout << "Количество четных элементов: " << even_count << endl;
-	cout << "Количество нечетных элементов: " << odd_count << endl;
+	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ С‡РµС‚РЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ: " << even_count << endl;
+	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РЅРµС‡РµС‚РЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ: " << odd_count << endl;
 
-	// выделяем паямть под массивы
+	// РІС‹РґРµР»СЏРµРј РїР°СЏРјС‚СЊ РїРѕРґ РјР°СЃСЃРёРІС‹
 	int* even_arr = new int[even_count];
 	int* odd_arr = new int[odd_count];
 
