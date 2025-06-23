@@ -269,7 +269,7 @@ template<typename T>T* push_back(T arr[], int& n, const T value)
 	n++;
 
 	//7) Mission complete - значение добавлено.
-	return buffer;
+	return arr;
 }
 
 template<typename T>T* push_front(T arr[], int& n, const T value)
@@ -282,7 +282,7 @@ template<typename T>T* push_front(T arr[], int& n, const T value)
 	delete[] arr;
 	buffer[0] = value;
 	n++;
-	return buffer;
+	return arr;
 }
 
 template<typename T>T* insert(T arr[], int& n, const T value, const int index)
@@ -364,7 +364,7 @@ template<typename T>void push_col_back(T** arr, const int rows, int& cols)
 	for (int i = 0; i < rows; i++)
 	{
 		arr[i] = push_back(arr[i], cols, T());   //T() - значение по умолчанию для шаблонного типа.
-		cols--
+		cols--;
 	}
 	cols++;
 }
